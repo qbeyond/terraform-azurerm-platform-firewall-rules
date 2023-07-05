@@ -1,4 +1,4 @@
-resource "azurerm_firewall_policy_rule_collection_group" "policy_collection" {
+resource "azurerm_firewall_policy_rule_collection_group" "this" {
   name               = "rcg-${local.responsibility}"
   firewall_policy_id = var.firewall_policy_id
   priority           = 100
@@ -9,7 +9,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "policy_collection" {
     action   = "Allow"
 
     rule {
-      name                  = "rl-alz-to-dc-inbound"
+      name                  = "allow-alz-to-dc-inbound"
       protocols             = ["TCP", "UDP"]
       source_ip_groups      = [azurerm_ip_group.ipg_aplication_lz.id]
       destination_ip_groups = [azurerm_ip_group.ipg_azure_dc.id, azurerm_ip_group.ipg_onprem_dc.id]
@@ -22,11 +22,11 @@ resource "azurerm_firewall_policy_rule_collection_group" "policy_collection" {
 
   network_rule_collection {
     name     = "rc-DNSPrivateResolver-${var.stage}"
-    priority = 200
+    priority = 110
     action   = "Allow"
 
     rule {
-      name                  = "rl-dnsresolver-to-dc-inbound"
+      name                  = "allow-dnsresolver-to-dc-inbound"
       protocols             = ["Any"]
       source_ip_groups      = [azurerm_ip_group.ipg_azure_dc.id]
       destination_ip_groups = [azurerm_ip_group.ipg_DNSPrivateResolver.id]
@@ -36,11 +36,11 @@ resource "azurerm_firewall_policy_rule_collection_group" "policy_collection" {
 
   network_rule_collection {
     name     = "rc-internet_outbound-${var.stage}"
-    priority = 300
+    priority = 120
     action   = "Allow"
 
     rule {
-      name              = "rl-alz-to-kms-outbound"
+      name              = "allow-alz-to-kms-outbound"
       protocols         = ["TCP"]
       source_ip_groups  = [azurerm_ip_group.ipg_aplication_lz.id]
       destination_fqdns = ["kms.core.windows.net", "azkms.core.windows.net"]
@@ -48,7 +48,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "policy_collection" {
     }
 
     rule {
-      name                  = "rl-icmp_all-outbound"
+      name                  = "allow-icmp_all-everywhere"
       protocols             = ["ICMP"]
       source_addresses      = ["*"]
       destination_addresses = ["*"]
@@ -56,7 +56,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "policy_collection" {
     }
 
     rule {
-      name             = "backup-monitoring-outbound"
+      name             = "allow-backup-monitoring-outbound"
       protocols        = ["TCP"]
       source_ip_groups = [azurerm_ip_group.ipg_aplication_lz.id]
       destination_addresses = ["AzureBackup",
@@ -69,7 +69,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "policy_collection" {
     }
 
     rule {
-      name                  = "update-management-outbound"
+      name                  = "allow-update-management-outbound"
       protocols             = ["TCP"]
       source_ip_groups      = [azurerm_ip_group.ipg_aplication_lz.id]
       destination_addresses = ["AzureUpdateDelivery", "AzureFrontDoor.FirstParty"]
