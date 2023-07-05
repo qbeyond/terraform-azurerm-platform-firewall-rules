@@ -49,7 +49,7 @@ variable "ip_address_onpremises_dc" {
   }
 }
 
-variable "ip_address_alz" {
+variable "ip_address_applicationlandingzone" {
   type        = set(string)
   description = "The application landing zone are ip ranges of applications that need to be added to the firewall rule set."
   validation {

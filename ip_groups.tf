@@ -1,4 +1,4 @@
-resource "azurerm_ip_group" "ipg_azure_dc" {
+resource "azurerm_ip_group" "azure_dc" {
   name                = "ipg-azure-dcs"
   location            = var.default_location
   resource_group_name = var.resource_group_name
@@ -10,7 +10,7 @@ resource "azurerm_ip_group" "ipg_azure_dc" {
   }
 }
 
-resource "azurerm_ip_group" "ipg_onprem_dc" {
+resource "azurerm_ip_group" "onpremise_dc" {
   name                = "ipg-onprem-dcs"
   location            = var.default_location
   resource_group_name = var.resource_group_name
@@ -22,7 +22,7 @@ resource "azurerm_ip_group" "ipg_onprem_dc" {
   }
 }
 
-resource "azurerm_ip_group" "ipg_DNSPrivateResolver" {
+resource "azurerm_ip_group" "dnsprivateresolver" {
   name                = "ipg-DNSPrivateResolver"
   location            = var.default_location
   resource_group_name = var.resource_group_name
@@ -34,7 +34,7 @@ resource "azurerm_ip_group" "ipg_DNSPrivateResolver" {
   }
 }
 
-resource "azurerm_ip_group" "ipg_aplication_lz" {
+resource "azurerm_ip_group" "aplication_lz" {
   name                = "ipg-application-landing-zone"
   location            = var.default_location
   resource_group_name = var.resource_group_name
