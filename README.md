@@ -96,7 +96,7 @@ module "firewall_rules" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_default_location"></a> [default\_location](#input\_default\_location) | The default location used for this module. | `string` | n/a | yes |
-| <a name="input_ip_address_alz"></a> [ip\_address\_alz](#input\_ip\_address\_alz) | The application landing zone are ip ranges of applications that need to be added to the firewall rule set. | `set(string)` | n/a | yes |
+| <a name="input_ip_address_applicationlandingzone"></a> [ip\_address\_applicationlandingzone](#input\_ip\_address\_applicationlandingzone) | The application landing zone are ip ranges of applications that need to be added to the firewall rule set. | `set(string)` | n/a | yes |
 | <a name="input_ip_address_azure_dc"></a> [ip\_address\_azure\_dc](#input\_ip\_address\_azure\_dc) | The ip addresses of the domain controller located in azure. As standard the alz should only located in azure. | `set(string)` | n/a | yes |
 | <a name="input_ip_address_dnsprivateresolver"></a> [ip\_address\_dnsprivateresolver](#input\_ip\_address\_dnsprivateresolver) | The ip address of the private dns resolver for the ip group. | `string` | n/a | yes |
 | <a name="input_ip_address_onpremises_dc"></a> [ip\_address\_onpremises\_dc](#input\_ip\_address\_onpremises\_dc) | If the customer still operates domain controller on premise, provide these in this variable. | `set(string)` | n/a | yes |
@@ -127,10 +127,10 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azurerm_ip_group.ipg_DNSPrivateResolver](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/ip_group) | resource |
-| [azurerm_ip_group.ipg_aplication_lz](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/ip_group) | resource |
-| [azurerm_ip_group.ipg_azure_dc](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/ip_group) | resource |
-| [azurerm_ip_group.ipg_onprem_dc](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/ip_group) | resource |
+| [azurerm_ip_group.aplication_lz](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/ip_group) | resource |
+| [azurerm_ip_group.azure_dc](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/ip_group) | resource |
+| [azurerm_ip_group.dnsprivateresolver](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/ip_group) | resource |
+| [azurerm_ip_group.onpremise_dc](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/ip_group) | resource |
 
 ### main.tf
 
