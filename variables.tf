@@ -43,7 +43,7 @@ variable "ipg_dnsprivateresolver_id" {
   description = "The ip address of the private dns resolver inbound endpoint."
 }
 
-variable "ipg_aplication_lz_id" {
+variable "ipg_application_lz_id" {
   type        = string
   description = "IP ranges for all application landing zones."
 }
