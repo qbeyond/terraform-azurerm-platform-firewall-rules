@@ -34,7 +34,19 @@ resource "azurerm_ip_group" "dnsprivateresolver" {
   }
 }
 
-resource "azurerm_ip_group" "aplication_lz" {
+resource "azurerm_ip_group" "application_lz" {
+  name                = "ipg-application-landing-zone"
+  location            = local.location
+  resource_group_name = azurerm_resource_group.example.name
+
+  cidrs = ["10.0.2.0/24"]
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
+}
+
+resource "azurerm_ip_group" "platform" {
   name                = "ipg-application-landing-zone"
   location            = local.location
   resource_group_name = azurerm_resource_group.example.name
