@@ -1,10 +1,11 @@
-# Module
-[![GitHub tag](https://img.shields.io/github/tag/qbeyond/terraform-module-template.svg)](https://registry.terraform.io/modules/qbeyond/terraform-module-template/provider/latest)
-[![License](https://img.shields.io/github/license/qbeyond/terraform-module-template.svg)](https://github.com/qbeyond/terraform-module-template/blob/main/LICENSE)
+# Platform Firewall Rules
 
-----
+[![GitHub tag](https://img.shields.io/github/tag/qbeyond/terraform-azurerm-platform-firewall-rules.svg)](https://registry.terraform.io/modules/qbeyond/terraform-azurerm-platform-firewall-rules/provider/latest)
+[![License](https://img.shields.io/github/license/qbeyond/terraform-azurerm-platform-firewall-rules.svg)](https://github.com/qbeyond/terraform-azurerm-platform-firewall-rules/blob/main/LICENSE)
 
-This is a template module. It just showcases how a module should look. This would be a short description of the module.
+---
+
+This module creates a firewall rule collection group with standardized rules for platform. This includes rules from azure to azure services and exclude rules that are customer or q.beyond specific. The standard ist defined by the q.beyond AG.
 
 <!-- BEGIN_TF_DOCS -->
 ## Usage
@@ -78,10 +79,10 @@ module "firewall_rules" {
   stage            = "prd"
   default_location = local.location
 
-  ip_address_az_dc              = ["10.0.0.10/32", "10.0.0.11/32"]
-  ip_address_onprem_dc          = []
-  ip_address_alz                = ["10.0.2.0/24"]
-  ip_address_DNSPrivateResolver = "10.0.1.0/24"
+  ipg_azure_dc_id           = azurerm_ip_group.azure_dc.id
+  ipg_onpremise_dc_id       = azurerm_ip_group.onpremise_dc.id
+  ipg_aplication_lz_id      = azurerm_ip_group.aplication_lz.id
+  ipg_dnsprivateresolver_id = azurerm_ip_group.dnsprivateresolver.id
 }
 ```
 
@@ -96,13 +97,14 @@ module "firewall_rules" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_default_location"></a> [default\_location](#input\_default\_location) | The default location used for this module. | `string` | n/a | yes |
-| <a name="input_ip_address_applicationlandingzone"></a> [ip\_address\_applicationlandingzone](#input\_ip\_address\_applicationlandingzone) | The application landing zone are ip ranges of applications that need to be added to the firewall rule set. | `set(string)` | n/a | yes |
-| <a name="input_ip_address_azure_dc"></a> [ip\_address\_azure\_dc](#input\_ip\_address\_azure\_dc) | The ip addresses of the domain controller located in azure. As standard the alz should only located in azure. | `set(string)` | n/a | yes |
-| <a name="input_ip_address_dnsprivateresolver"></a> [ip\_address\_dnsprivateresolver](#input\_ip\_address\_dnsprivateresolver) | The ip address of the private dns resolver for the ip group. | `string` | n/a | yes |
-| <a name="input_ip_address_onpremises_dc"></a> [ip\_address\_onpremises\_dc](#input\_ip\_address\_onpremises\_dc) | If the customer still operates domain controller on premise, provide these in this variable. | `set(string)` | n/a | yes |
+| <a name="input_ipg_application_lz_id"></a> [ipg\_application\_lz\_id](#input\_ipg\_application\_lz\_id) | IP ranges for all application landing zones. | `string` | n/a | yes |
+| <a name="input_ipg_azure_dc_id"></a> [ipg\_azure\_dc\_id](#input\_ipg\_azure\_dc\_id) | The ip addresses of the domain controller located in azure. | `string` | n/a | yes |
+| <a name="input_ipg_dnsprivateresolver_id"></a> [ipg\_dnsprivateresolver\_id](#input\_ipg\_dnsprivateresolver\_id) | The ip address of the private dns resolver inbound endpoint. | `string` | n/a | yes |
+| <a name="input_ipg_platform_id"></a> [ipg\_platform\_id](#input\_ipg\_platform\_id) | IP ranges for the whole platform service, defined by the azure landing zone core modules. | `string` | n/a | yes |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group in which the firewall policy and the azure firewall are located. | `string` | n/a | yes |
 | <a name="input_stage"></a> [stage](#input\_stage) | The stage that the resource is located in, e.g. prod, dev. | `string` | n/a | yes |
 | <a name="input_firewall_policy_id"></a> [firewall\_policy\_id](#input\_firewall\_policy\_id) | For testing use this | `string` | `null` | no |
+| <a name="input_ipg_onpremise_dc_id"></a> [ipg\_onpremise\_dc\_id](#input\_ipg\_onpremise\_dc\_id) | If the customer still operates domain controller on premise, provide these in this variable. | `string` | `null` | no |
 | <a name="input_responsibility"></a> [responsibility](#input\_responsibility) | The responsibility means who is responsible for the rule collection, e.g. is this rule collection in this module used as general rule set for the firewall, other responsibilities would be the customer etc. | `string` | `"Platform"` | no |
 ## Outputs
 
@@ -113,7 +115,6 @@ No outputs.
 | Type | Used |
 |------|-------|
 | [azurerm_firewall_policy_rule_collection_group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/firewall_policy_rule_collection_group) | 1 |
-| [azurerm_ip_group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/ip_group) | 4 |
 
 **`Used` only includes resource blocks.** `for_each` and `count` meta arguments, as well as resource blocks of modules are not considered.
 
@@ -122,15 +123,6 @@ No outputs.
 No modules.
 
 ## Resources by Files
-
-### ip_groups.tf
-
-| Name | Type |
-|------|------|
-| [azurerm_ip_group.aplication_lz](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/ip_group) | resource |
-| [azurerm_ip_group.azure_dc](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/ip_group) | resource |
-| [azurerm_ip_group.dnsprivateresolver](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/ip_group) | resource |
-| [azurerm_ip_group.onpremise_dc](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/ip_group) | resource |
 
 ### main.tf
 

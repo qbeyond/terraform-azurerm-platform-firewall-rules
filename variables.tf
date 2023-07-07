@@ -27,44 +27,28 @@ variable "default_location" {
   nullable    = false
 }
 
-variable "ip_address_azure_dc" {
-  type        = set(string)
-  description = "The ip addresses of the domain controller located in azure. As standard the alz should only located in azure."
-  validation {
-    condition = alltrue(
-      [for value in var.ip_address_az_dc : can(regex("^(\\d{1,3}[.]){3}(\\d{1,3}[/]\\d{1,3}){1}$", value))]
-    )
-    error_message = "The provided ip address does not match the syntax of ddd.ddd.ddd.ddd/ddd"
-  }
-}
-
-variable "ip_address_onpremises_dc" {
-  type        = set(string)
-  description = "If the customer still operates domain controller on premise, provide these in this variable."
-  validation {
-    condition = alltrue(
-      [for value in var.ip_address_onprem_dc : can(regex("^(\\d{1,3}[.]){3}(\\d{1,3}[/]\\d{1,3}){1}$", value))]
-    )
-    error_message = "The provided ip address does not match the syntax of ddd.ddd.ddd.ddd/ddd"
-  }
-}
-
-variable "ip_address_applicationlandingzone" {
-  type        = set(string)
-  description = "The application landing zone are ip ranges of applications that need to be added to the firewall rule set."
-  validation {
-    condition = alltrue(
-      [for value in var.ip_address_alz : can(regex("^(\\d{1,3}[.]){3}(\\d{1,3}[/]\\d{1,3}){1}$", value))]
-    )
-    error_message = "The provided ip address does not match the syntax of ddd.ddd.ddd.ddd/ddd"
-  }
-}
-
-variable "ip_address_dnsprivateresolver" {
+variable "ipg_azure_dc_id" {
   type        = string
-  description = "The ip address of the private dns resolver for the ip group."
-  validation {
-    condition     = can(regex("^(\\d{1,3}[.]){3}(\\d{1,3}[/]\\d{1,3}){1}$", var.ip_address_DNSPrivateResolver))
-    error_message = "The provided ip address does not match the syntax of ddd.ddd.ddd.ddd/ddd"
-  }
+  description = "The ip addresses of the domain controller located in azure."
+}
+
+variable "ipg_onpremise_dc_id" {
+  type        = string
+  description = "If the customer still operates domain controller on premise, provide these in this variable."
+  default     = null
+}
+
+variable "ipg_dnsprivateresolver_id" {
+  type        = string
+  description = "The ip address of the private dns resolver inbound endpoint."
+}
+
+variable "ipg_application_lz_id" {
+  type        = string
+  description = "IP ranges for all application landing zones."
+}
+
+variable "ipg_platform_id" {
+  type        = string
+  description = "IP ranges for the whole platform service, defined by the azure landing zone core modules."
 }
