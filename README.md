@@ -8,11 +8,9 @@
 This module creates a firewall rule collection group with standardized rules for platform. This includes rules from azure to azure services and exclude rules that are customer or q.beyond specific. The standard ist defined by the q.beyond AG.
 
 <!-- BEGIN_TF_DOCS -->
-
 ## Usage
 
 It's very easy to use!
-
 ```hcl
 provider "azurerm" {
   features {}
@@ -90,33 +88,33 @@ module "firewall_rules" {
 
 ## Requirements
 
-| Name                                                               | Version  |
-| ------------------------------------------------------------------ | -------- |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement_azurerm) | >= 3.7.0 |
+| Name | Version |
+|------|---------|
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.7.0 |
 
 ## Inputs
 
-| Name                                                                                                         | Description                                                                                                                                                                                                   | Type     | Default      | Required |
-| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------ | :------: |
-| <a name="input_default_location"></a> [default_location](#input_default_location)                            | The default location used for this module.                                                                                                                                                                    | `string` | n/a          |   yes    |
-| <a name="input_ipg_aplication_lz_id"></a> [ipg_aplication_lz_id](#input_ipg_aplication_lz_id)                | IP ranges for all application landing zones.                                                                                                                                                                  | `string` | n/a          |   yes    |
-| <a name="input_ipg_azure_dc_id"></a> [ipg_azure_dc_id](#input_ipg_azure_dc_id)                               | The ip addresses of the domain controller located in azure.                                                                                                                                                   | `string` | n/a          |   yes    |
-| <a name="input_ipg_dnsprivateresolver_id"></a> [ipg_dnsprivateresolver_id](#input_ipg_dnsprivateresolver_id) | The ip address of the private dns resolver inbound endpoint.                                                                                                                                                  | `string` | n/a          |   yes    |
-| <a name="input_resource_group_name"></a> [resource_group_name](#input_resource_group_name)                   | The name of the resource group in which the firewall policy and the azure firewall are located.                                                                                                               | `string` | n/a          |   yes    |
-| <a name="input_stage"></a> [stage](#input_stage)                                                             | The stage that the resource is located in, e.g. prod, dev.                                                                                                                                                    | `string` | n/a          |   yes    |
-| <a name="input_firewall_policy_id"></a> [firewall_policy_id](#input_firewall_policy_id)                      | For testing use this                                                                                                                                                                                          | `string` | `null`       |    no    |
-| <a name="input_ipg_onpremise_dc_id"></a> [ipg_onpremise_dc_id](#input_ipg_onpremise_dc_id)                   | If the customer still operates domain controller on premise, provide these in this variable.                                                                                                                  | `string` | `null`       |    no    |
-| <a name="input_responsibility"></a> [responsibility](#input_responsibility)                                  | The responsibility means who is responsible for the rule collection, e.g. is this rule collection in this module used as general rule set for the firewall, other responsibilities would be the customer etc. | `string` | `"Platform"` |    no    |
-
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_default_location"></a> [default\_location](#input\_default\_location) | The default location used for this module. | `string` | n/a | yes |
+| <a name="input_ipg_application_lz_id"></a> [ipg\_application\_lz\_id](#input\_ipg\_application\_lz\_id) | IP ranges for all application landing zones. | `string` | n/a | yes |
+| <a name="input_ipg_azure_dc_id"></a> [ipg\_azure\_dc\_id](#input\_ipg\_azure\_dc\_id) | The ip addresses of the domain controller located in azure. | `string` | n/a | yes |
+| <a name="input_ipg_dnsprivateresolver_id"></a> [ipg\_dnsprivateresolver\_id](#input\_ipg\_dnsprivateresolver\_id) | The ip address of the private dns resolver inbound endpoint. | `string` | n/a | yes |
+| <a name="input_ipg_platform_id"></a> [ipg\_platform\_id](#input\_ipg\_platform\_id) | IP ranges for the whole platform service, defined by the azure landing zone core modules. | `string` | n/a | yes |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group in which the firewall policy and the azure firewall are located. | `string` | n/a | yes |
+| <a name="input_stage"></a> [stage](#input\_stage) | The stage that the resource is located in, e.g. prod, dev. | `string` | n/a | yes |
+| <a name="input_firewall_policy_id"></a> [firewall\_policy\_id](#input\_firewall\_policy\_id) | For testing use this | `string` | `null` | no |
+| <a name="input_ipg_onpremise_dc_id"></a> [ipg\_onpremise\_dc\_id](#input\_ipg\_onpremise\_dc\_id) | If the customer still operates domain controller on premise, provide these in this variable. | `string` | `null` | no |
+| <a name="input_responsibility"></a> [responsibility](#input\_responsibility) | The responsibility means who is responsible for the rule collection, e.g. is this rule collection in this module used as general rule set for the firewall, other responsibilities would be the customer etc. | `string` | `"Platform"` | no |
 ## Outputs
 
 No outputs.
 
 ## Resource types
 
-| Type                                                                                                                                                                   | Used |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
-| [azurerm_firewall_policy_rule_collection_group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/firewall_policy_rule_collection_group) | 1    |
+| Type | Used |
+|------|-------|
+| [azurerm_firewall_policy_rule_collection_group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/firewall_policy_rule_collection_group) | 1 |
 
 **`Used` only includes resource blocks.** `for_each` and `count` meta arguments, as well as resource blocks of modules are not considered.
 
@@ -128,10 +126,9 @@ No modules.
 
 ### main.tf
 
-| Name                                                                                                                                                                        | Type     |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| Name | Type |
+|------|------|
 | [azurerm_firewall_policy_rule_collection_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/firewall_policy_rule_collection_group) | resource |
-
 <!-- END_TF_DOCS -->
 
 ## Contribute
