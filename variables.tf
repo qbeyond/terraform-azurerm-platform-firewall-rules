@@ -29,21 +29,21 @@ variable "default_location" {
 
 variable "ipg_azure_dc_id" {
   type        = string
-  description = "The ip addresses of the domain controller located in azure. As standard the alz should only located in azure."
+  description = "The ip addresses of the domain controller located in azure."
 }
 
 variable "ipg_onpremise_dc_id" {
   type        = string
   description = "If the customer still operates domain controller on premise, provide these in this variable."
-  default     = ""
+  default     = null
 }
 
 variable "ipg_dnsprivateresolver_id" {
   type        = string
-  description = "The ip address of the private dns resolver."
+  description = "The ip address of the private dns resolver inbound endpoint."
 }
 
 variable "ipg_aplication_lz_id" {
   type        = string
-  description = "The application landing zone are ip ranges of applications that need to be added to the firewall rule set."
+  description = "IP ranges for all application landing zones."
 }
