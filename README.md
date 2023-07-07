@@ -81,10 +81,10 @@ module "firewall_rules" {
   stage            = "prd"
   default_location = local.location
 
-  ip_address_az_dc              = ["10.0.0.10/32", "10.0.0.11/32"]
-  ip_address_onprem_dc          = []
-  ip_address_alz                = ["10.0.2.0/24"]
-  ip_address_DNSPrivateResolver = "10.0.1.0/24"
+  ipg_azure_dc_id           = azurerm_ip_group.azure_dc.id
+  ipg_onpremise_dc_id       = azurerm_ip_group.onpremise_dc.id
+  ipg_aplication_lz_id      = azurerm_ip_group.aplication_lz.id
+  ipg_dnsprivateresolver_id = azurerm_ip_group.dnsprivateresolver.id
 }
 ```
 
