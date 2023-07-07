@@ -42,7 +42,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
     rule {
       name              = "allow-alz-to-kms-outbound"
       protocols         = ["TCP"]
-      source_ip_groups  = var.ipg_onpremise_dc_id != null ? [var.ipg_application_lz_id, var.ipg_azure_dc_id, var.ipg_onpremise_dc_id] : [var.ipg_application_lz_id, var.ipg_azure_dc_id]
+      source_ip_groups  = [var.ipg_application_lz_id, var.ipg_platform_id]
       destination_fqdns = ["kms.core.windows.net", "azkms.core.windows.net"]
       destination_ports = ["1688"]
     }
@@ -58,7 +58,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
     rule {
       name             = "allow-backup-monitoring-outbound"
       protocols        = ["TCP"]
-      source_ip_groups = var.ipg_onpremise_dc_id != null ? [var.ipg_application_lz_id, var.ipg_azure_dc_id, var.ipg_onpremise_dc_id] : [var.ipg_application_lz_id, var.ipg_azure_dc_id]
+      source_ip_groups = [var.ipg_application_lz_id, var.ipg_platform_id]
       destination_addresses = ["AzureBackup",
         "AzureMonitor",
         "AzureActiveDirectory",
@@ -71,7 +71,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
     rule {
       name                  = "allow-update-management-outbound"
       protocols             = ["TCP"]
-      source_ip_groups      = var.ipg_onpremise_dc_id != null ? [var.ipg_application_lz_id, var.ipg_azure_dc_id, var.ipg_onpremise_dc_id] : [var.ipg_application_lz_id, var.ipg_azure_dc_id]
+      source_ip_groups      = [var.ipg_application_lz_id, var.ipg_platform_id]
       destination_addresses = ["AzureUpdateDelivery", "AzureFrontDoor.FirstParty"]
       destination_ports     = ["80", "443"]
     }

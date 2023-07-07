@@ -47,3 +47,8 @@ variable "ipg_application_lz_id" {
   type        = string
   description = "IP ranges for all application landing zones."
 }
+
+variable "ipg_platform_id" {
+  type        = string
+  description = "IP ranges for the whole platform service, defined by the azure landing zone core modules."
+}
