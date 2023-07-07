@@ -1,7 +1,7 @@
 # Platform Firewall Rules
 
-[![GitHub tag](https://img.shields.io/github/tag/qbeyond/terraform-module-template.svg)](https://registry.terraform.io/modules/qbeyond/terraform-module-template/provider/latest)
-[![License](https://img.shields.io/github/license/qbeyond/terraform-module-template.svg)](https://github.com/qbeyond/terraform-module-template/blob/main/LICENSE)
+[![GitHub tag](https://img.shields.io/github/tag/qbeyond/terraform-azurerm-platform-firewall-rules.svg)](https://registry.terraform.io/modules/qbeyond/terraform-azurerm-platform-firewall-rules/provider/latest)
+[![License](https://img.shields.io/github/license/qbeyond/terraform-azurerm-platform-firewall-rules.svg)](https://github.com/qbeyond/terraform-azurerm-platform-firewall-rules/blob/main/LICENSE)
 
 ---
 
