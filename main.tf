@@ -78,7 +78,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
   }
 
   application_rule_collection {
-    name     = "rc-internet_outbound-${var.stage}"
+    name     = "rc-application_internet_outbound-${var.stage}"
     priority = 130
     action   = "Allow"
 
