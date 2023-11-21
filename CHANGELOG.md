@@ -7,10 +7,6 @@ and this module adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-# [1.0.0] - 2023-07-07
-
-Initial release of platform firewall rules
-
 ## [1.1.0] - 2023-11-17
 
 ### Added
@@ -24,3 +20,7 @@ Initial release of platform firewall rules
 ### Fixed
 
 - windows defender can find and download updates
+
+# [1.0.0] - 2023-07-07
+
+Initial release of platform firewall rules
