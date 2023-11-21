@@ -76,4 +76,24 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
       destination_ports     = ["80", "443"]
     }
   }
+
+  application_rule_collection {
+    name     = "rc-internet_outbound-${var.stage}"
+    priority = 130
+    action   = "allow"
+
+    rule {
+      name                  = "allow-update-management-outbound"
+      source_ip_groups      = [var.ipg_application_lz_id, var.ipg_platform_id]
+      destination_fqdn_tags = ["WindowsUpdate"]
+      protocols {
+        type = "Http"
+        port = 80
+      }
+      protocols {
+        type = "Https"
+        port = 443
+      }
+    }
+  }
 }
