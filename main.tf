@@ -3,10 +3,6 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
   firewall_policy_id = var.firewall_policy_id
   priority           = 100
 
-  # MAAER - Dynamic Blocks "könnten" so funktionieren - for_each braucht eine Liste,
-  # und für jedes Element dieser Liste wird eine "network_rule_collection" als subresource erstellt.
-  # Diese sollte also genau [] (leer, 0 Elemente) oder ["create_one_collection"] (1 Element) sein,
-  # um bei true die Subressource zu erstellen und bei false nicht.
   dynamic "network_rule_collection" {
     for_each = var.ipg_azure_dc_id == "" ? [] : [var.ipg_azure_dc_id]
     content {

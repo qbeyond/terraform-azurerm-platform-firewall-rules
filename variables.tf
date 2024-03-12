@@ -54,11 +54,3 @@ variable "ipg_platform_id" {
   type        = string
   description = "IP ranges for the whole platform service, defined by the azure landing zone core modules."
 }
-
-# MAAER - use a variable like this for conditional creation
-# of DC Network Roule Collection
-# variable "dc_network_rule_creation" {
-#   type        = "bool"
-#   description = "Whether network rule collection for dc's should be created"
-#   default     = false
-# }
