@@ -47,7 +47,7 @@ resource "azurerm_ip_group" "application_lz" {
 }
 
 resource "azurerm_ip_group" "platform" {
-  name                = "ipg-application-landing-zone"
+  name                = "ipg-platform"
   location            = local.location
   resource_group_name = azurerm_resource_group.example.name
 
