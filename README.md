@@ -14,6 +14,7 @@ It's very easy to use!
 ```hcl
 provider "azurerm" {
   features {}
+  skip_provider_registration = true
 }
 
 resource "azurerm_resource_group" "example" {
@@ -79,10 +80,7 @@ module "firewall_rules" {
   stage            = "prd"
   default_location = local.location
 
-  ipg_azure_dc_id           = azurerm_ip_group.azure_dc.id
-  ipg_onpremise_dc_id       = azurerm_ip_group.onpremise_dc.id
   ipg_application_lz_id     = azurerm_ip_group.application_lz.id
-  ipg_dnsprivateresolver_id = azurerm_ip_group.dnsprivateresolver.id
   ipg_platform_id           = azurerm_ip_group.platform.id
 }
 ```
@@ -99,12 +97,12 @@ module "firewall_rules" {
 |------|-------------|------|---------|:--------:|
 | <a name="input_default_location"></a> [default\_location](#input\_default\_location) | The default location used for this module. | `string` | n/a | yes |
 | <a name="input_ipg_application_lz_id"></a> [ipg\_application\_lz\_id](#input\_ipg\_application\_lz\_id) | IP ranges for all application landing zones. | `string` | n/a | yes |
-| <a name="input_ipg_azure_dc_id"></a> [ipg\_azure\_dc\_id](#input\_ipg\_azure\_dc\_id) | The ip addresses of the domain controller located in azure. | `string` | n/a | yes |
-| <a name="input_ipg_dnsprivateresolver_id"></a> [ipg\_dnsprivateresolver\_id](#input\_ipg\_dnsprivateresolver\_id) | The ip address of the private dns resolver inbound endpoint. | `string` | n/a | yes |
 | <a name="input_ipg_platform_id"></a> [ipg\_platform\_id](#input\_ipg\_platform\_id) | IP ranges for the whole platform service, defined by the azure landing zone core modules. | `string` | n/a | yes |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group in which the firewall policy and the azure firewall are located. | `string` | n/a | yes |
 | <a name="input_stage"></a> [stage](#input\_stage) | The stage that the resource is located in, e.g. prod, dev. | `string` | n/a | yes |
 | <a name="input_firewall_policy_id"></a> [firewall\_policy\_id](#input\_firewall\_policy\_id) | For testing use this | `string` | `null` | no |
+| <a name="input_ipg_azure_dc_id"></a> [ipg\_azure\_dc\_id](#input\_ipg\_azure\_dc\_id) | The ip addresses of the domain controller located in azure. If the value is not provided, this network rule collection will not be created. | `string` | `""` | no |
+| <a name="input_ipg_dnsprivateresolver_id"></a> [ipg\_dnsprivateresolver\_id](#input\_ipg\_dnsprivateresolver\_id) | The ip address of the private dns resolver inbound endpoint. If the value is not provided, this network rule collection will not be created | `string` | `""` | no |
 | <a name="input_ipg_onpremise_dc_id"></a> [ipg\_onpremise\_dc\_id](#input\_ipg\_onpremise\_dc\_id) | If the customer still operates domain controller on premise, provide these in this variable. | `string` | `null` | no |
 | <a name="input_responsibility"></a> [responsibility](#input\_responsibility) | The responsibility means who is responsible for the rule collection, e.g. is this rule collection in this module used as general rule set for the firewall, other responsibilities would be the customer etc. | `string` | `"Platform"` | no |
 ## Outputs
