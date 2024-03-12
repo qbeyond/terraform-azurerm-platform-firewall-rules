@@ -29,7 +29,8 @@ variable "default_location" {
 
 variable "ipg_azure_dc_id" {
   type        = string
-  description = "The ip addresses of the domain controller located in azure."
+  description = "The ip addresses of the domain controller located in azure. If the value is not provided, this network rule collection will not be created."
+  default     = ""
 }
 
 variable "ipg_onpremise_dc_id" {
@@ -40,7 +41,8 @@ variable "ipg_onpremise_dc_id" {
 
 variable "ipg_dnsprivateresolver_id" {
   type        = string
-  description = "The ip address of the private dns resolver inbound endpoint."
+  description = "The ip address of the private dns resolver inbound endpoint. If the value is not provided, this network rule collection will not be created"
+  default     = ""
 }
 
 variable "ipg_application_lz_id" {
@@ -52,3 +54,11 @@ variable "ipg_platform_id" {
   type        = string
   description = "IP ranges for the whole platform service, defined by the azure landing zone core modules."
 }
+
+# MAAER - use a variable like this for conditional creation
+# of DC Network Roule Collection
+# variable "dc_network_rule_creation" {
+#   type        = "bool"
+#   description = "Whether network rule collection for dc's should be created"
+#   default     = false
+# }

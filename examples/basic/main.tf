@@ -1,5 +1,6 @@
 provider "azurerm" {
   features {}
+  skip_provider_registration = true
 }
 
 resource "azurerm_resource_group" "example" {
@@ -65,9 +66,6 @@ module "firewall_rules" {
   stage            = "prd"
   default_location = local.location
 
-  ipg_azure_dc_id           = azurerm_ip_group.azure_dc.id
-  ipg_onpremise_dc_id       = azurerm_ip_group.onpremise_dc.id
   ipg_application_lz_id     = azurerm_ip_group.application_lz.id
-  ipg_dnsprivateresolver_id = azurerm_ip_group.dnsprivateresolver.id
   ipg_platform_id           = azurerm_ip_group.platform.id
 }

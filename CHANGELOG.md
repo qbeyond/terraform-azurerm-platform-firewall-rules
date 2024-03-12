@@ -7,6 +7,10 @@ and this module adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.2.0] - 2023-03-12
+
+- made rules for private dns resolver and azure dcs optional
+
 ## [1.1.0] - 2023-11-17
 
 ### Added
