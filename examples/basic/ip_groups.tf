@@ -57,3 +57,15 @@ resource "azurerm_ip_group" "platform" {
     ignore_changes = [tags]
   }
 }
+
+resource "azurerm_ip_group" "bastion" {
+  name                = "ipg-bastion"
+  location            = local.location
+  resource_group_name = azurerm_resource_group.example.name
+
+  cidrs = ["10.0.2.0/24"]
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
+}
