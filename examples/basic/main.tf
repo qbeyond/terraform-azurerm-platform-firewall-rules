@@ -4,7 +4,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = "rg-example-fw"
+  name     = "rg-example-fwp"
   location = local.location
 }
 
@@ -30,22 +30,6 @@ resource "azurerm_public_ip" "example" {
   sku                 = "Standard"
 }
 
-resource "azurerm_firewall" "example" {
-  name                = "fw-example"
-  location            = local.location
-  resource_group_name = azurerm_resource_group.example.name
-  sku_name            = "AZFW_VNet"
-  sku_tier            = "Standard"
-
-  firewall_policy_id = azurerm_firewall_policy.example.id
-
-  ip_configuration {
-    name                 = "ip-config"
-    subnet_id            = azurerm_subnet.example.id
-    public_ip_address_id = azurerm_public_ip.example.id
-  }
-}
-
 resource "azurerm_firewall_policy" "example" {
   name                = "fwp-example"
   resource_group_name = azurerm_resource_group.example.name
@@ -68,4 +52,9 @@ module "firewall_rules" {
 
   ipg_application_lz_id     = azurerm_ip_group.application_lz.id
   ipg_platform_id           = azurerm_ip_group.platform.id
+  bastion_config = {
+    ipg_bastion_id = azurerm_ip_group.bastion.id
+    ipg_rdp_access_ids = [azurerm_ip_group.application_lz.id]
+    ipg_ssh_access_ids = [azurerm_ip_group.application_lz.id]
+  }
 }
