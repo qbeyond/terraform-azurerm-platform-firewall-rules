@@ -75,10 +75,10 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
 
       rule {
         name                  = "allow-dc-to-dnsresolver-inbound"
-        protocols             = ["Any"]
+        protocols             = ["UDP"]
         source_ip_groups      = var.ipg_onpremise_dc_id != null ? [var.ipg_azure_dc_id, var.ipg_onpremise_dc_id] : [var.ipg_azure_dc_id]
         destination_ip_groups = [var.ipg_dnsprivateresolver_id]
-        destination_ports     = ["*"]
+        destination_ports     = ["53"]
       }
     }
   }
