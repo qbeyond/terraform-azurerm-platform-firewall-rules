@@ -23,10 +23,7 @@ module "firewall_rules" {
 
   firewall_policy_id  = azurerm_firewall_policy.example.id
   resource_group_name = azurerm_resource_group.example.name
-
-  responsibility   = "Platform"
-  stage            = "prd"
-  default_location = local.location
+  stage               = "tst"
 
   ipg_application_lz_id = azurerm_ip_group.application_lz.id
   ipg_platform_id       = azurerm_ip_group.platform.id

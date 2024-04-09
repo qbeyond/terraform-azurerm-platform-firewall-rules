@@ -21,12 +21,6 @@ variable "stage" {
   description = "The stage that the resource is located in, e.g. prod, dev."
 }
 
-variable "default_location" {
-  type        = string
-  description = "The default location used for this module."
-  nullable    = false
-}
-
 variable "ipg_azure_dc_id" {
   type        = string
   description = "The ip addresses of the domain controller located in azure. If the value is not provided, this network rule collection will not be created."
