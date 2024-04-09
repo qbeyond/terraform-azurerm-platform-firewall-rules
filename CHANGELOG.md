@@ -7,6 +7,17 @@ and this module adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.0] - 2024-04-09
+
+### Added
+
+### Changed
+
+### Removed
+- `default_location` from variables as it is not needed
+
+### Fixed
+
 ## [1.2.0] - 2024-04-08
 
 ### Added
