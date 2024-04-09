@@ -37,10 +37,7 @@ module "firewall_rules" {
 
   firewall_policy_id  = azurerm_firewall_policy.example.id
   resource_group_name = azurerm_resource_group.example.name
-
-  responsibility   = "Platform"
-  stage            = "prd"
-  default_location = local.location
+  stage               = "tst"
 
   ipg_application_lz_id = azurerm_ip_group.application_lz.id
   ipg_platform_id       = azurerm_ip_group.platform.id
@@ -57,7 +54,6 @@ module "firewall_rules" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_default_location"></a> [default\_location](#input\_default\_location) | The default location used for this module. | `string` | n/a | yes |
 | <a name="input_ipg_application_lz_id"></a> [ipg\_application\_lz\_id](#input\_ipg\_application\_lz\_id) | IP ranges for all application landing zones. | `string` | n/a | yes |
 | <a name="input_ipg_platform_id"></a> [ipg\_platform\_id](#input\_ipg\_platform\_id) | IP ranges for the whole platform service, defined by the azure landing zone core modules. | `string` | n/a | yes |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group in which the firewall policy and the azure firewall are located. | `string` | n/a | yes |
