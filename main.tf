@@ -93,6 +93,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
       dynamic "rule" {
         for_each = var.bastion_config.ipg_rdp_access_ids
         content {
+          # Generate rule name from the IP group name to avoid conflicts. The name is captured from the resource ID
           name                  = "allow-bastion-to-${regex(".+\\/(.+)?", rule.value)[0]}-rdp"
           protocols             = ["TCP"]
           source_ip_groups      = [network_rule_collection.value]
@@ -104,6 +105,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
       dynamic "rule" {
         for_each = var.bastion_config.ipg_ssh_access_ids
         content {
+          # Generate rule name from the IP group name to avoid conflicts. The name is captured from the resource ID
           name                  = "allow-bastion-to-${regex(".+\\/(.+)?", rule.value)[0]}-ssh"
           protocols             = ["TCP"]
           source_ip_groups      = [network_rule_collection.value]
