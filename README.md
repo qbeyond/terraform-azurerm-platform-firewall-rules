@@ -64,13 +64,8 @@ module "firewall_rules" {
   stage            = "prd"
   default_location = local.location
 
-  ipg_application_lz_id     = azurerm_ip_group.application_lz.id
-  ipg_platform_id           = azurerm_ip_group.platform.id
-  bastion_config = {
-    ipg_bastion_id = azurerm_ip_group.bastion.id
-    ipg_rdp_access_ids = [azurerm_ip_group.application_lz.id]
-    ipg_ssh_access_ids = [azurerm_ip_group.application_lz.id]
-  }
+  ipg_application_lz_id = azurerm_ip_group.application_lz.id
+  ipg_platform_id       = azurerm_ip_group.platform.id
 }
 ```
 
@@ -91,8 +86,8 @@ module "firewall_rules" {
 | <a name="input_stage"></a> [stage](#input\_stage) | The stage that the resource is located in, e.g. prod, dev. | `string` | n/a | yes |
 | <a name="input_bastion_config"></a> [bastion\_config](#input\_bastion\_config) | <pre>ipg_bastion_id: If the customer uses bastion, provide the bastion ip-group in this variable.<br>  ipg_rdp_access_ids: If rdp access is needed, provide vm ip-groups in this variable. Every ip-group provided in this list, will be accessible by bastion.<br>  ipg_ssh_access_ids: If ssh access is needed, provide vm ip-groups in this variable. Every ip-group provided in this list, will be accessible by bastion.</pre> | <pre>object({<br>    ipg_bastion_id = string<br>    ipg_rdp_access_ids = optional(list(string), [])<br>    ipg_ssh_access_ids = optional(list(string), [])<br>  })</pre> | `null` | no |
 | <a name="input_firewall_policy_id"></a> [firewall\_policy\_id](#input\_firewall\_policy\_id) | For testing use this | `string` | `null` | no |
-| <a name="input_ipg_azure_dc_id"></a> [ipg\_azure\_dc\_id](#input\_ipg\_azure\_dc\_id) | The ip addresses of the domain controller located in azure. If the value is not provided, this network rule collection will not be created. | `string` | `""` | no |
-| <a name="input_ipg_dnsprivateresolver_id"></a> [ipg\_dnsprivateresolver\_id](#input\_ipg\_dnsprivateresolver\_id) | The ip address of the private dns resolver inbound endpoint. If the value is not provided, this network rule collection will not be created | `string` | `""` | no |
+| <a name="input_ipg_azure_dc_id"></a> [ipg\_azure\_dc\_id](#input\_ipg\_azure\_dc\_id) | The ip addresses of the domain controller located in azure. If the value is not provided, this network rule collection will not be created. | `string` | `null` | no |
+| <a name="input_ipg_dnsprivateresolver_id"></a> [ipg\_dnsprivateresolver\_id](#input\_ipg\_dnsprivateresolver\_id) | The ip address of the private dns resolver inbound endpoint. If the value is not provided, this network rule collection will not be created | `string` | `null` | no |
 | <a name="input_ipg_onpremise_dc_id"></a> [ipg\_onpremise\_dc\_id](#input\_ipg\_onpremise\_dc\_id) | If the customer still operates domain controller on premise, provide these in this variable. | `string` | `null` | no |
 | <a name="input_responsibility"></a> [responsibility](#input\_responsibility) | The responsibility means who is responsible for the rule collection, e.g. is this rule collection in this module used as general rule set for the firewall, other responsibilities would be the customer etc. | `string` | `"Platform"` | no |
 ## Outputs
