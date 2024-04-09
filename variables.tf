@@ -29,7 +29,8 @@ variable "default_location" {
 
 variable "ipg_azure_dc_id" {
   type        = string
-  description = "The ip addresses of the domain controller located in azure."
+  description = "The ip addresses of the domain controller located in azure. If the value is not provided, this network rule collection will not be created."
+  default     = null
 }
 
 variable "ipg_onpremise_dc_id" {
@@ -40,7 +41,8 @@ variable "ipg_onpremise_dc_id" {
 
 variable "ipg_dnsprivateresolver_id" {
   type        = string
-  description = "The ip address of the private dns resolver inbound endpoint."
+  description = "The ip address of the private dns resolver inbound endpoint. If the value is not provided, this network rule collection will not be created"
+  default     = null
 }
 
 variable "ipg_application_lz_id" {
@@ -51,4 +53,20 @@ variable "ipg_application_lz_id" {
 variable "ipg_platform_id" {
   type        = string
   description = "IP ranges for the whole platform service, defined by the azure landing zone core modules."
+}
+
+variable "bastion_config" {
+  type = object({
+    ipg_bastion_id = string
+    ipg_rdp_access_ids = optional(list(string), [])
+    ipg_ssh_access_ids = optional(list(string), [])
+  })
+  default = null 
+  description = <<-DOC
+  ```
+    ipg_bastion_id: If the customer uses bastion, provide the bastion ip-group in this variable.
+    ipg_rdp_access_ids: If rdp access is needed, provide vm ip-groups in this variable. Every ip-group provided in this list, will be accessible by bastion.
+    ipg_ssh_access_ids: If ssh access is needed, provide vm ip-groups in this variable. Every ip-group provided in this list, will be accessible by bastion.     
+  ```
+  DOC
 }
