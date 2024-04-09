@@ -30,7 +30,7 @@ variable "default_location" {
 variable "ipg_azure_dc_id" {
   type        = string
   description = "The ip addresses of the domain controller located in azure. If the value is not provided, this network rule collection will not be created."
-  default     = ""
+  default     = null
 }
 
 variable "ipg_onpremise_dc_id" {
@@ -42,7 +42,7 @@ variable "ipg_onpremise_dc_id" {
 variable "ipg_dnsprivateresolver_id" {
   type        = string
   description = "The ip address of the private dns resolver inbound endpoint. If the value is not provided, this network rule collection will not be created"
-  default     = ""
+  default     = null
 }
 
 variable "ipg_application_lz_id" {

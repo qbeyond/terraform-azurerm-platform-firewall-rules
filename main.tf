@@ -47,7 +47,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
   }
 
   dynamic "network_rule_collection" {
-    for_each = var.ipg_azure_dc_id == "" ? [] : [var.ipg_azure_dc_id]
+    for_each = var.ipg_azure_dc_id == null ? [] : [var.ipg_azure_dc_id]
     content {
       name     = "rc-DomainController-${var.stage}"
       priority = 105
@@ -67,7 +67,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
   }
 
   dynamic "network_rule_collection" {
-    for_each = var.ipg_dnsprivateresolver_id == "" ? [] : [var.ipg_dnsprivateresolver_id]
+    for_each = var.ipg_dnsprivateresolver_id == null ? [] : [var.ipg_dnsprivateresolver_id]
     content {
       name     = "rc-DNSPrivateResolver-${var.stage}"
       priority = 110
@@ -82,11 +82,6 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
       }
     }
   }
-
-
-
-
-
 
   dynamic "network_rule_collection" {
     for_each = var.bastion_config == null ? [] : [var.bastion_config.ipg_bastion_id]
