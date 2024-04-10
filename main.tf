@@ -105,7 +105,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
       dynamic "rule" {
         for_each = var.bastion_config.ipg_ssh_access_ids
         content {
-          # Generate rule name from the IP group name to avoid conflicts. The name is captured from the resource ID
+          # The regex outputs the name of the ip group from id.
           name                  = "allow-bastion-to-${regex(".+\\/(.+)?", rule.value)[0]}-ssh"
           protocols             = ["TCP"]
           source_ip_groups      = [network_rule_collection.value]
