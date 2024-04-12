@@ -75,10 +75,10 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
 
       rule {
         name                  = "allow-dc-to-dnsresolver-inbound"
-        protocols             = ["Any"]
+        protocols             = ["UDP","TCP"]
         source_ip_groups      = var.ipg_onpremise_dc_id != null ? [var.ipg_azure_dc_id, var.ipg_onpremise_dc_id] : [var.ipg_azure_dc_id]
         destination_ip_groups = [var.ipg_dnsprivateresolver_id]
-        destination_ports     = ["*"]
+        destination_ports     = ["53"]
       }
     }
   }
@@ -93,6 +93,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
       dynamic "rule" {
         for_each = var.bastion_config.ipg_rdp_access_ids
         content {
+          # The regex outputs the name of the ip group from id.
           name                  = "allow-bastion-to-${regex(".+\\/(.+)?", rule.value)[0]}-rdp"
           protocols             = ["TCP"]
           source_ip_groups      = [network_rule_collection.value]
@@ -104,6 +105,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
       dynamic "rule" {
         for_each = var.bastion_config.ipg_ssh_access_ids
         content {
+          # The regex outputs the name of the ip group from id.
           name                  = "allow-bastion-to-${regex(".+\\/(.+)?", rule.value)[0]}-ssh"
           protocols             = ["TCP"]
           source_ip_groups      = [network_rule_collection.value]
