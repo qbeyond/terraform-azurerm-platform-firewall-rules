@@ -60,7 +60,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
         destination_ip_groups = var.ipg_onpremise_dc_id != null ? [var.ipg_azure_dc_id, var.ipg_onpremise_dc_id] : [var.ipg_azure_dc_id]
         destination_ports = [
           "53", "88", "123", "135", "137", "138", "139",
-          "389", "445", "464", "636", "3268", "3269", "9389"
+          "389", "445", "464", "636", "3268", "3269", "9389", "49152-65535"
         ]
       }
     }
@@ -75,7 +75,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
 
       rule {
         name                  = "allow-dc-to-dnsresolver-inbound"
-        protocols             = ["UDP","TCP"]
+        protocols             = ["UDP", "TCP"]
         source_ip_groups      = var.ipg_onpremise_dc_id != null ? [var.ipg_azure_dc_id, var.ipg_onpremise_dc_id] : [var.ipg_azure_dc_id]
         destination_ip_groups = [var.ipg_dnsprivateresolver_id]
         destination_ports     = ["53"]
