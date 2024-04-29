@@ -7,6 +7,11 @@ and this module adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.1] - 2024-04-29
+
+### Fixed
+- add missing AD ports
+
 ## [2.0.0] - 2024-04-09
 
 ### Added
