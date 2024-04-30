@@ -10,7 +10,7 @@ and this module adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 ## [2.0.1] - 2024-04-29
 
 ### Fixed
-- add missing AD ports
+- add missing RPC randomly allocated high TCP ports for AD (`49152 – 65535`) between domain controllers.
 
 ## [2.0.0] - 2024-04-09
 
