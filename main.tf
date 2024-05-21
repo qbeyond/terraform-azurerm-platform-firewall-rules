@@ -179,7 +179,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
           "secure.aadcdn.microsoftonline-p.com",
           "*.microsoftonline.com",
           "*.blob.core.windows.net",
-          "*.aadconnecthealth.azure.com"
+          "*.aadconnecthealth.azure.com",
           "*.adhybridhealth.azure.com",
           "management.azure.com",
           "policykeyservice.dc.ad.msft.net",
