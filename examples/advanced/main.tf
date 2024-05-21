@@ -29,6 +29,7 @@ module "firewall_rules" {
   ipg_azure_dc_id           = azurerm_ip_group.azure_dc.id
   ipg_application_lz_id     = azurerm_ip_group.application_lz.id
   ipg_platform_id           = azurerm_ip_group.platform.id
+  ipg_entra_connect_id      = azurerm_ip_group.entra_connect.id
   bastion_config = {
     ipg_bastion_id     = azurerm_ip_group.bastion.id
     ipg_rdp_access_ids = [azurerm_ip_group.application_lz.id]
