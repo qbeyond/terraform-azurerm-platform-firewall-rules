@@ -134,5 +134,71 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
         port = 443
       }
     }
+
+    rule {
+      name              = "allow-certificate-verification-outbound"
+      source_ip_groups  = [var.ipg_application_lz_id, var.ipg_platform_id]
+      destination_fqdns = [
+        "mscrl.microsoft.com",
+        "*.verisign.com",
+        "*.entrust.net",
+        "*.crl3.digicert.com",
+        "*.crl4.digicert.com",
+        "*.digicert.cn",
+        "*.ocsp.digicert.com",
+        "*.www.d-trust.net",
+        "*.root-c3-ca2-2009.ocsp.d-trust.net",
+        "*.crl.microsoft.com",
+        "*.oneocsp.microsoft.com",
+        "*.ocsp.msocsp.com"
+      ]
+      protocols {
+        type = "Http"
+        port = 80
+      }
+      protocols {
+        type = "Https"
+        port = 443
+      }
+    }
+  }
+
+  dynamic "application_rule_collection" {
+    for_each = var.ipg_entra_connect_id == null ? [] : [var.ipg_entra_connect_id]
+    content {
+      name     = "rc-application_entra_connect_outbound-${var.stage}"
+      priority = 155
+      action   = "Allow"
+
+      rule {
+        name              = "allow-entra-connect-outbound"
+        source_ip_groups  = [var.ipg_entra_connect_id]
+        destination_fqdns = [
+          "*.management.core.windows.net",
+          "*.graph.windows.net",
+          "secure.aadcdn.microsoftonline-p.com",
+          "*.microsoftonline.com"
+          "*.blob.core.windows.net",
+          "*.aadconnecthealth.azure.com"
+          "*.adhybridhealth.azure.com",
+          "management.azure.com",
+          "policykeyservice.dc.ad.msft.net",
+          "login.windows.net",
+          "www.office.com", # Used for discovery purposes during registration
+          "aadcdn.msftauth.net",
+          "aadcdn.msauth.net",
+          "autoupdate.msappproxy.net",
+          "www.microsoft.com"
+        ]
+        protocols {
+          type = "Http"
+          port = 80
+        }
+        protocols {
+          type = "Https"
+          port = 443
+        }
+      }
+    }
   }
 }

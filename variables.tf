@@ -64,3 +64,8 @@ variable "bastion_config" {
   ```
   DOC
 }
+
+variable "ipg_entra_connect_id" {
+  type        = string
+  description = "IP ranges for entra id connect VMs."
+}
