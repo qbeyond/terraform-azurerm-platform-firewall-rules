@@ -7,6 +7,11 @@ and this module adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.1.0] - 2024-05-21
+
+### Added
+- Rules for entra connect
+
 ## [2.0.1] - 2024-04-29
 
 ### Fixed
