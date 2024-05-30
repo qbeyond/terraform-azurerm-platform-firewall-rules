@@ -7,6 +7,13 @@ and this module adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.1.1] - 2024-05-30
+
+### Fixed
+
+- `ipg_entra_connect_id` is now optional as intended
+- allow `crl3.digicert.com`, `crl4.digicert.com` and `ocsp.digicert.com` for Entra connect
+
 ## [2.1.0] - 2024-05-21
 
 ### Added
