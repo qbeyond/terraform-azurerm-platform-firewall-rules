@@ -192,7 +192,9 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
           "aadcdn.msauth.net",
           "autoupdate.msappproxy.net",
           "www.microsoft.com",
-          "*.registration.msappproxy.net" # used for SSO registration
+          "*.registration.msappproxy.net",       # used for SSO registration
+          "*.passwordreset.microsoftonline.com", # used for password writeback
+          "*.servicebus.windows.net"             # used for password writeback
         ]
         protocols {
           type = "Http"
