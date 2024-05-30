@@ -68,4 +68,5 @@ variable "bastion_config" {
 variable "ipg_entra_connect_id" {
   type        = string
   description = "IP ranges for entra id connect VMs."
+  default     = null
 }
