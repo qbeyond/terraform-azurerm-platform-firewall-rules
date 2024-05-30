@@ -51,11 +51,11 @@ variable "ipg_platform_id" {
 
 variable "bastion_config" {
   type = object({
-    ipg_bastion_id = string
+    ipg_bastion_id     = string
     ipg_rdp_access_ids = optional(list(string), [])
     ipg_ssh_access_ids = optional(list(string), [])
   })
-  default = null 
+  default     = null
   description = <<-DOC
   ```
     ipg_bastion_id: If the customer uses bastion, provide the bastion ip-group in this variable.
