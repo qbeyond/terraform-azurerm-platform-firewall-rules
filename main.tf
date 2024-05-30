@@ -136,15 +136,18 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
     }
 
     rule {
-      name              = "allow-certificate-verification-outbound"
-      source_ip_groups  = [var.ipg_application_lz_id, var.ipg_platform_id]
+      name             = "allow-certificate-verification-outbound"
+      source_ip_groups = [var.ipg_application_lz_id, var.ipg_platform_id]
       destination_fqdns = [
         "mscrl.microsoft.com",
         "*.verisign.com",
         "*.entrust.net",
+        "crl3.digicert.com",
         "*.crl3.digicert.com",
+        "crl4.digicert.com",
         "*.crl4.digicert.com",
         "*.digicert.cn",
+        "ocsp.digicert.com",
         "*.ocsp.digicert.com",
         "*.www.d-trust.net",
         "*.root-c3-ca2-2009.ocsp.d-trust.net",
@@ -171,8 +174,8 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
       action   = "Allow"
 
       rule {
-        name              = "allow-entra-connect-outbound"
-        source_ip_groups  = [var.ipg_entra_connect_id]
+        name             = "allow-entra-connect-outbound"
+        source_ip_groups = [var.ipg_entra_connect_id]
         destination_fqdns = [
           "*.management.core.windows.net",
           "*.graph.windows.net",
