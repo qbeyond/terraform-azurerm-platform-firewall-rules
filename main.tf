@@ -191,7 +191,8 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
           "aadcdn.msftauth.net",
           "aadcdn.msauth.net",
           "autoupdate.msappproxy.net",
-          "www.microsoft.com"
+          "www.microsoft.com",
+          "*.registration.msappproxy.net" # used for SSO registration
         ]
         protocols {
           type = "Http"
