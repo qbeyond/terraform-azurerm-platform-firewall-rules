@@ -153,7 +153,11 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
         "*.root-c3-ca2-2009.ocsp.d-trust.net",
         "*.crl.microsoft.com",
         "*.oneocsp.microsoft.com",
-        "*.ocsp.msocsp.com"
+        "*.ocsp.msocsp.com",
+        "cdp.geotrust.com",
+        "cacerts.geotrust.com",
+        "cacerts.digicert.com",
+        "status.geotrust.com"
       ]
       protocols {
         type = "Http"
