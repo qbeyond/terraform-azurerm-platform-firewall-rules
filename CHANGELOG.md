@@ -10,7 +10,7 @@ and this module adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 ## [2.1.2] - 2024-10-24
 
 ### Fixed
-- allow `cdp.geotrust.com`, `cacerts.geotrust.com`, `cacerts.digicert.com` and `status.geotrust.com` for Entra connect
+- allow `cdp.geotrust.com`, `cacerts.geotrust.com`, `cacerts.digicert.com` and `status.geotrust.com` for windows activation based on [learn.microsoft.com](https://learn.microsoft.com/en-us/azure/security/fundamentals/azure-ca-details?tabs=root-and-subordinate-cas-list#public-key-encryption-and-signature-algorithms)
 
 ## [2.1.1] - 2024-05-30
 
