@@ -7,6 +7,11 @@ and this module adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.1.2] - 2024-10-24
+
+### Fixed
+- allow `cdp.geotrust.com`, `cacerts.geotrust.com`, `cacerts.digicert.com` and `status.geotrust.com` for Entra connect
+
 ## [2.1.1] - 2024-05-30
 
 ### Fixed
