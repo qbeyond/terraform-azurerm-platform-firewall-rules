@@ -7,6 +7,12 @@ and this module adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.2.0] - 2025-06-03
+
+### Added
+- Rules for On Premise Domain Controller Traffic
+- Added Platform IP Spaces to the existing DC rule
+
 ## [2.1.2] - 2024-10-24
 
 ### Fixed

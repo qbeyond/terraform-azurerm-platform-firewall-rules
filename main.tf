@@ -1,3 +1,9 @@
+locals {
+  dc_ports = ["53", "88", "123", "135", "137", "138", "139",
+          "389", "445", "464", "636", "1026", "3268", "3269", "5005", "9389", "49152-65535"]
+}
+
+
 resource "azurerm_firewall_policy_rule_collection_group" "this" {
   name               = "rcg-${var.responsibility}"
   firewall_policy_id = var.firewall_policy_id
@@ -56,12 +62,26 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
       rule {
         name                  = "allow-alz-to-dc-inbound"
         protocols             = ["TCP", "UDP"]
-        source_ip_groups      = [var.ipg_application_lz_id]
+        source_ip_groups      = [var.ipg_application_lz_id, var.ipg_platform_id]
         destination_ip_groups = var.ipg_onpremise_dc_id != null ? [var.ipg_azure_dc_id, var.ipg_onpremise_dc_id] : [var.ipg_azure_dc_id]
-        destination_ports = [
-          "53", "88", "123", "135", "137", "138", "139",
-          "389", "445", "464", "636", "3268", "3269", "9389", "49152-65535"
-        ]
+        destination_ports     = local.dc_ports
+      }
+    }
+  }
+
+  dynamic "network_rule_collection" {
+    for_each = var.ipg_onpremise_dc_id != null && var.ipg_azure_dc_id != null ? [var.ipg_onpremise_dc_id] : []
+    content {
+      name     = "rc-OnPremiseDC-${var.stage}"
+      priority = 120
+      action   = "Allow"
+
+      rule {
+        name                  = "allow-dc-to-dc-inbound"
+        protocols             = ["TCP", "UDP"]
+        source_ip_groups      = [var.ipg_azure_dc_id, var.ipg_onpremise_dc_id]
+        destination_ip_groups = [var.ipg_azure_dc_id, var.ipg_onpremise_dc_id]
+        destination_ports     = local.dc_ports
       }
     }
   }
