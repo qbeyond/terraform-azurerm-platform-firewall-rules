@@ -10,7 +10,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
   priority           = 100
 
   network_rule_collection {
-    name     = "rc-internet_outbound-${var.stage}"
+    name     = "rc-net-InternetOutbound-${var.stage}"
     priority = 100
     action   = "Allow"
 
@@ -55,7 +55,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
   dynamic "network_rule_collection" {
     for_each = var.ipg_azure_dc_id == null ? [] : [var.ipg_azure_dc_id]
     content {
-      name     = "rc-DomainController-${var.stage}"
+      name     = "rc-net-DomainController-${var.stage}"
       priority = 105
       action   = "Allow"
 
@@ -72,7 +72,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
   dynamic "network_rule_collection" {
     for_each = var.ipg_onpremise_dc_id != null && var.ipg_azure_dc_id != null ? [var.ipg_onpremise_dc_id] : []
     content {
-      name     = "rc-OnPremiseDC-${var.stage}"
+      name     = "rc-net-OnPremiseDC-${var.stage}"
       priority = 120
       action   = "Allow"
 
@@ -89,7 +89,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
   dynamic "network_rule_collection" {
     for_each = var.ipg_dnsprivateresolver_id == null ? [] : [var.ipg_dnsprivateresolver_id]
     content {
-      name     = "rc-DNSPrivateResolver-${var.stage}"
+      name     = "rc-net-DNSPrivateResolver-${var.stage}"
       priority = 110
       action   = "Allow"
 
@@ -106,7 +106,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
   dynamic "network_rule_collection" {
     for_each = var.bastion_config == null ? [] : [var.bastion_config.ipg_bastion_id]
     content {
-      name     = "rc-Bastion-${var.stage}"
+      name     = "rc-net-Bastion-${var.stage}"
       priority = 115
       action   = "Allow"
 
@@ -137,7 +137,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
   }
 
   application_rule_collection {
-    name     = "rc-application_internet_outbound-${var.stage}"
+    name     = "rc-app-InternetOutbound-${var.stage}"
     priority = 150
     action   = "Allow"
 
@@ -193,7 +193,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "this" {
   dynamic "application_rule_collection" {
     for_each = var.ipg_entra_connect_id == null ? [] : [var.ipg_entra_connect_id]
     content {
-      name     = "rc-application_entra_connect_outbound-${var.stage}"
+      name     = "rc-app-EntraConnectOutbound-${var.stage}"
       priority = 155
       action   = "Allow"
 
