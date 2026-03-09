@@ -7,6 +7,11 @@ and this module adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.3.0] - 2026-09-03
+
+### Added
+- aligned Azure Firewall Policy Rule Collection names with the current Confluence naming convention by using the `rc-{type}-{LogicalName}-{status}` pattern for network and application rule collections
+
 ## [2.2.0] - 2025-06-03
 
 ### Added
